@@ -3,8 +3,21 @@ from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse("Index page")
+    context = {
+        'title': "Главная страница магазина ИНТЕРЬЕР",
+        'top_content': "Всё, чего заслуживает ваш дом"
+    }
+    return render(request, 'main/index.html', context)
 
 
-def about(request):
-    return HttpResponse("About page")
+def catalog(request):
+    context = {
+        'title': "Каталог",
+    }
+    return render(request, 'main/index.html', context)
+
+def cart(request):
+    context = {
+        'title': "Корзина",
+    }
+    return render(request, 'main/index.html', context)

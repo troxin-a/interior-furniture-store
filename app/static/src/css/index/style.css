@@ -1,0 +1,51 @@
+.top {
+  height: 735px;
+  background-image: url(../../img/index/bg_top.jpg); }
+  .top__text {
+    font-size: 24px;
+    line-height: 32px;
+    padding-bottom: 16px;
+    color: white;
+    font-weight: 400; }
+  .top__link {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-decoration-line: underline;
+    transition: color 0.2s; }
+    .top__link:hover {
+      color: #888888;
+      text-decoration: none; }
+
+.for {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(12, 1fr); }
+  .for__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 415px;
+    grid-column: span 4;
+    color: white;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 41px;
+    transition: transform 0.2s, box-shadow 0.2s; }
+    .for__item:hover {
+      transform: scale(1.01); }
+    .for__item_big {
+      grid-column: span 6; }
+    .for__item_1 {
+      background-image: url(../../img/index/categories/for1.jpg); }
+    .for__item_2 {
+      background-image: url(../../img/index/categories/for2.jpg); }
+    .for__item_3 {
+      background-image: url(../../img/index/categories/for3.jpg); }
+    .for__item_4 {
+      background-image: url(../../img/index/categories/for4.jpg); }
+    .for__item_5 {
+      background-image: url(../../img/index/categories/for5.jpg); }
+
+/*# sourceMappingURL=style.css.map */

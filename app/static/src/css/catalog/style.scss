@@ -1,0 +1,78 @@
+.top {
+  height: 400px;
+  background-image: url(../../img/catalog/bg_top.jpg);
+}
+
+.content {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+
+    .breadcrumbs {
+      &__link:not(:last-child)::after {
+        content: "/";
+        color: #000000;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      &__link {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #888888;
+        }
+      }
+    }
+  }
+
+  &__sort {
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    width: 288px;
+    height: 41px;
+    box-sizing: border-box;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 20px;
+    padding-left: 14px;
+    padding-right: 14px;
+
+    &::after {
+      justify-self: end;
+      content: "";
+      width: 17px;
+      height: 8px;
+      background-color: #000000;
+      clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+      grid-area: select;
+    }
+
+    .select {
+      border: none;
+      outline: none;
+      appearance: none;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      grid-area: select;
+
+      &::-ms-expand {
+        display: none;
+      }
+    }
+  }
+}

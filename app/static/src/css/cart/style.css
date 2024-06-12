@@ -1,0 +1,167 @@
+@keyframes pulsate-fwd {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(0.95); }
+  100% {
+    transform: scale(1); } }
+@keyframes vibrate-1 {
+  0% {
+    transform: translate(0); }
+  20% {
+    transform: translate(-1px, 1px); }
+  40% {
+    transform: translate(-1px, -1px); }
+  60% {
+    transform: translate(1px, 1px); }
+  80% {
+    transform: translate(1px, -1px); }
+  100% {
+    transform: translate(0); } }
+.top {
+  height: 400px;
+  background-image: url(../../img/cart/bg_top.jpg); }
+
+.cart {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding-top: 64px;
+  gap: 32px; }
+  .cart .left {
+    grid-column: span 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .cart .left__header {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 27px 14px 3px;
+      color: black;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px; }
+  .cart .item {
+    padding-top: 18px;
+    padding-bottom: 24px;
+    border-top: 0.5px solid #cacdd8;
+    display: flex;
+    justify-content: space-between; }
+    .cart .item__img {
+      height: 173px; }
+    .cart .item__info {
+      display: flex;
+      gap: 32px; }
+    .cart .item__title {
+      color: black;
+      font-size: 24px;
+      font-weight: 500;
+      padding-bottom: 16px; }
+    .cart .item__description {
+      max-width: 276px;
+      color: #888888;
+      font-size: 14px;
+      font-weight: 400;
+      padding-bottom: 16px; }
+    .cart .item__price {
+      color: #050505;
+      font-size: 16px;
+      font-weight: 500;
+      padding-bottom: 16px; }
+    .cart .item__links {
+      display: flex;
+      gap: 32px; }
+    .cart .item__link {
+      color: black;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration-line: underline;
+      transition: color 0.2s; }
+      .cart .item__link:hover {
+        color: #888888;
+        text-decoration: none; }
+    .cart .item__quantity {
+      width: 71px;
+      height: 51px;
+      border-radius: 6px;
+      border-style: none;
+      background: #f7f6f6;
+      font-family: "Poppins";
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 210%;
+      text-align: center;
+      padding-left: 16px;
+      padding-right: 16px; }
+  .cart .form {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 556px;
+    border-radius: 20px;
+    background: #f7f6f6;
+    padding-top: 42px;
+    max-width: 376px; }
+    .cart .form__box {
+      display: flex;
+      flex-direction: column;
+      margin-top: 35px;
+      gap: 41px; }
+    .cart .form__title {
+      color: black;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 29px; }
+    .cart .form .form__input {
+      border: none;
+      outline: none;
+      background: transparent;
+      border-bottom: 1px solid #cacdd8;
+      color: black;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      padding-bottom: 3px; }
+      .cart .form .form__input::placeholder {
+        color: black; }
+    .cart .form__total {
+      margin-top: 23px;
+      margin-bottom: 18px;
+      color: black;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 29px;
+      text-align: center; }
+    .cart .form__button {
+      width: 290px;
+      height: 41px;
+      box-sizing: border-box;
+      border: 1px solid #040404;
+      border-radius: 20px;
+      color: black;
+      font-size: 16px;
+      font-weight: 400;
+      animation: pulsate-fwd 0.5s ease-in-out infinite both; }
+      .cart .form__button:hover {
+        background-color: black;
+        color: white;
+        animation: vibrate-1 0.3s linear infinite both; }
+  .cart__actions {
+    display: flex;
+    gap: 14px; }
+  .cart__button {
+    width: 200px;
+    height: 37px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 50px;
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+    transition: background 0.5s, color 0.5s; }
+    .cart__button:hover {
+      background-color: black;
+      color: white; }
+
+/*# sourceMappingURL=style.css.map */

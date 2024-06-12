@@ -28,7 +28,7 @@
         </a>
         <input type="text" class="header__input" placeholder="Поиск">
         <nav class="menu">
-            <a href="#" class="menu__link">Каталог</a>
+            <a href="{% url "catalog:index" %}" class="menu__link">Каталог</a>
             <a href="#" class="menu__link">Корзина</a>
         </nav>
 
@@ -115,7 +115,7 @@
             <div class="footer__item">
                 <h4 class="footer__heading">Меню</h4>
                 <a href="{% url "main:index" %}" class="footer__link">Главная</a>
-                <a href="#" class="footer__link">Каталог</a>
+                <a href="{% url "catalog:index" %}" class="footer__link">Каталог</a>
                 <a href="#" class="footer__link">Корзина</a>
             </div>
 

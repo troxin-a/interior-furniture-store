@@ -1,12 +1,9 @@
-from os import name
 from django.urls import path
 
-from main.views import index, catalog, cart
+from main import views
 
 app_name = 'main'
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('catalog/', catalog, name='catalog'),
-    path('cart/', cart, name='cart')
+    path('', views.index, name='index'),
 ]

@@ -22,7 +22,9 @@ a {
   text-decoration: none;
 }
 
-input, button, select {
+input,
+button,
+select {
   font-family: inherit;
 }
 
@@ -230,7 +232,7 @@ button {
     gap: 20px;
     align-items: center;
 
-    .icon path{
+    .icon path {
       transition: fill 0.2s;
     }
 

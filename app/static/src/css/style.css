@@ -137,7 +137,27 @@ button {
   font-size: 14px;
   line-height: 17px;
   color: #888888;
-  padding-bottom: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.content .products .product__sale {
+  position: absolute;
+  width: 378px;
+  display: flex;
+  justify-content: flex-end;
+  color: #000000;
+}
+.content .products .product__sale .text {
+  padding: 6px;
+  margin: 6px;
+  background-color: rgb(255, 208, 0);
+  box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.74);
+  -webkit-box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.74);
+  -moz-box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.74);
 }
 .content .products .box-price {
   display: flex;

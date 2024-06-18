@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load goods_tags %}
 
 
 {% block css %}
@@ -21,17 +22,29 @@
                 <a href="{% url "main:index" %}" class="breadcrumbs__link">Главная</a>
                 <a href="{% url "catalog:index" "all" %}" class="breadcrumbs__link">Каталог товаров</a>
             </div>
+            
+            <script>
+                function submitForm() {
+                    document.getElementById("order_form").submit();
+                }
+            </script>            
+            <form action="" method="get" id="order_form" class="form">
+                <div class="form__checkbox">
+                    <input type="checkbox" class="checkbox" name="on_sale" onchange="submitForm()" {% if request.GET.on_sale %}checked{% endif %}>Распродажа</input>
+                </div>
 
-            <div class="content__sort">
-                <select class="select">
-                    <option>Порядок: сначала новые</option>
-                    <option>Порядок: сначала недорогие</option>
-                    <option>Порядок: сначала дорогие</option>
-                </select>
-            </div>
+                <div class="form__order">
+                    <select class="select" name='order_by' onchange="submitForm()">
+                        <option value="default"
+                        {% if not request.GET.order_by or request.GET.order_by == "default" %}selected{% endif %}>Порядок: сначала новые</option>
+                        <option value="price" {% if request.GET.order_by == "price" %}selected{% endif %}>Порядок: сначала недорогие</option>
+                        <option value="-price" {% if request.GET.order_by == "-price" %}selected{% endif %}>Порядок: сначала дорогие</option>
+                    </select>
+                </div>
+            </form>
         </div>
 
-        
+
 
         {% include 'goods/includes/products.html' %}
 
@@ -41,7 +54,7 @@
                 <div class="items__item {% if not goods.has_previous %} disable {% endif %}">
                     <a class="items__link" href="
                         {% if goods.has_previous %}
-                            ?page={{goods.previous_page_number}}
+                            ?{% change_params page=goods.previous_page_number %}
                         {% else %}
                             #
                         {% endif %}
@@ -51,7 +64,7 @@
                 {% for page in goods.paginator.page_range %}
                     {% if page <= goods.number|add:2 and page >= goods.number|add:-2 %}
                         <div class="items__item {% if page == goods.number %}active{% endif %}">
-                            <a class="items__link" href="?page={{page}}">{{page}}</a>
+                            <a class="items__link" href="?{% change_params page=page %}">{{page}}</a>
                         </div>                    
                     {% endif %}                    
                 {% endfor %}
@@ -59,7 +72,7 @@
                 <div class="items__item {% if not goods.has_next %} disable {% endif %}">
                     <a class="items__link" href="
                         {% if goods.has_next %}
-                            ?page={{goods.next_page_number}}
+                            ?{% change_params page=goods.next_page_number %}
                         {% else %}
                             #
                         {% endif %}

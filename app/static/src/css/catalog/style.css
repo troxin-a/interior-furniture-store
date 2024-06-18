@@ -27,7 +27,17 @@
 .content__header .breadcrumbs__link:hover {
   color: #888888;
 }
-.content__sort {
+.content .form {
+  display: flex;
+  align-items: center;
+}
+.content .form__checkbox {
+  margin-right: 50px;
+}
+.content .form__checkbox .checkbox {
+  margin-right: 10px;
+}
+.content .form__order {
   display: grid;
   grid-template-areas: "select";
   align-items: center;
@@ -39,7 +49,7 @@
   padding-left: 14px;
   padding-right: 14px;
 }
-.content__sort::after {
+.content .form__order::after {
   justify-self: end;
   content: "";
   width: 17px;
@@ -49,7 +59,7 @@
           clip-path: polygon(100% 0%, 0 0%, 50% 100%);
   grid-area: select;
 }
-.content__sort .select {
+.content .form__order .select {
   border: none;
   outline: none;
   -webkit-appearance: none;
@@ -65,7 +75,7 @@
   cursor: pointer;
   grid-area: select;
 }
-.content__sort .select::-ms-expand {
+.content .form__order .select::-ms-expand {
   display: none;
 }
 .content .paginator {

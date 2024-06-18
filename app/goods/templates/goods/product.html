@@ -9,7 +9,7 @@
 
 {% block top__content %}
     <section class="top__content">
-        <h1 class="top__title">Диван NASTAN</h1>
+        <h1 class="top__title">{{ product.name }}</h1>
     </section>
 {% endblock top__content %}
 
@@ -17,12 +17,12 @@
 {% block content %}
     <section class="content center">
         <div class="prod">            
-            <img src="{% static "src/img/index/products/prod9.jpg" %}" alt="Диван NASTAN" class="prod__img">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="prod__img">
 
             <div class="right">
-                <p class="prod__description">Модель отличается простотой линий и форм, отсутствием броского декора. </p>
+                <p class="prod__description">{{ product.description }}</p>
                 <div class="box-price">
-                    <p class="price">80 000 руб.</p>
+                    <p class="price">{{ product.get_new_price }}</p>
                 </div>
                 <form action="#" class="form">
                     <button type="submit" class="form__button">Добавить в корзину</button>

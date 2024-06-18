@@ -11,7 +11,7 @@
     <section class="top__content">
         <h1 class="top__title">{{ top_content }}</h1>
         <p class="top__text">Наша мебель — ваше отражение</p>
-        <a href="{% url "catalog:index" %}" class="top__link">Перейти в каталог</a>
+        <a href="{% url "catalog:index" "all" %}" class="top__link">Перейти в каталог</a>
     </section>
 {% endblock top__content %}
 
@@ -21,20 +21,21 @@
         <h2 class="content__title">Мебель для ...</h2>
 
         <div class="for">
-            <div class="for__item for__item_1 for__item_big">ОТДЫХА</div>
-            <div class="for__item for__item_2 for__item_big">РАБОТЫ</div>
-            <div class="for__item for__item_3">КУХНИ</div>
-            <div class="for__item for__item_4">ДЕТСКОЙ</div>
-            <div class="for__item for__item_5">ВАННОЙ</div>
+            <a href="{% url "catalog:index" "otdyh" %}" class="for__item for__item_1 for__item_big">ОТДЫХА</a>
+            <a href="{% url "catalog:index" "rabota" %}" class="for__item for__item_2 for__item_big">РАБОТЫ</a>
+            <a href="{% url "catalog:index" "kuhnya" %}" class="for__item for__item_3">КУХНИ</a>
+            <a href="{% url "catalog:index" "detskaya" %}" class="for__item for__item_4">ДЕТСКОЙ</a>
+            <a href="{% url "catalog:index" "vannaya" %}" class="for__item for__item_5">ВАННОЙ</a>
         </div>
     </section>
 
     <section class="content center">
         <h2 class="content__title">Специальные предложения</h2>
 
+
         <div class="products">
-            <div class="products">
-                {% for product in goods_for_sale %}
+            {% for product in goods_for_sale %}
+                <a href="{% url "catalog:product" product.slug %}">
                     <div class="product">
                         {% if product.image %}
                             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product__img">
@@ -55,8 +56,8 @@
                             {% endif %}
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </a>
+            {% endfor %}
         </div>
 
     </section>
@@ -67,6 +68,6 @@
 
         {% include 'goods/includes/products.html' %}
 
-        <a href="{% url "catalog:index" %}" class="content__bottom-link">Перейти в каталог</a>
+        <a href="{% url "catalog:index" "all" %}" class="content__bottom-link">Перейти в каталог</a>
     </section>
 {% endblock content %}

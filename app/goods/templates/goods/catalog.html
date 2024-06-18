@@ -14,25 +14,60 @@
 {% endblock top__content %}
 
 
-{% block content %}
-    <section class="content center">
+{% block content %}    
+    <section class="content center">        
         <div class="content__header">
             <div class="breadcrumbs">
                 <a href="{% url "main:index" %}" class="breadcrumbs__link">Главная</a>
-                <a href="{% url "catalog:index" %}" class="breadcrumbs__link">Каталог товаров</a>
+                <a href="{% url "catalog:index" "all" %}" class="breadcrumbs__link">Каталог товаров</a>
             </div>
 
             <div class="content__sort">
                 <select class="select">
                     <option>Порядок: сначала новые</option>
-                    <option>Порядок: сначала старые</option>
+                    <option>Порядок: сначала недорогие</option>
+                    <option>Порядок: сначала дорогие</option>
                 </select>
             </div>
         </div>
 
+        
+
         {% include 'goods/includes/products.html' %}
 
-        <a href="{% url "catalog:index" %}" class="content__bottom-link">Показать еще</a>
+        {% comment %} <a href="{% url "catalog:index" %}" class="content__bottom-link">Показать еще</a> {% endcomment %}
+        <div class="paginator">
+            <div class="items">                
+                <div class="items__item {% if not goods.has_previous %} disable {% endif %}">
+                    <a class="items__link" href="
+                        {% if goods.has_previous %}
+                            ?page={{goods.previous_page_number}}
+                        {% else %}
+                            #
+                        {% endif %}
+                    ">&lt&lt</a>
+                </div>
+                
+                {% for page in goods.paginator.page_range %}
+                    {% if page <= goods.number|add:2 and page >= goods.number|add:-2 %}
+                        <div class="items__item {% if page == goods.number %}active{% endif %}">
+                            <a class="items__link" href="?page={{page}}">{{page}}</a>
+                        </div>                    
+                    {% endif %}                    
+                {% endfor %}
+
+                <div class="items__item {% if not goods.has_next %} disable {% endif %}">
+                    <a class="items__link" href="
+                        {% if goods.has_next %}
+                            ?page={{goods.next_page_number}}
+                        {% else %}
+                            #
+                        {% endif %}
+                    ">&gt&gt</a>
+                </div>
+            </div>
+        </div>
+        
     </section>
 {% endblock content %}
 

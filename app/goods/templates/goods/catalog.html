@@ -44,10 +44,17 @@
         </div>
 
 
+        {% if request.GET.q %}
+        <p class="text-search">Результаты поиска по запросу "{{ request.GET.q }}"</p>
+        {% if not goods %}
+        <p class="text-search">По запросу ничего не найдено</p><br><br><br><br><br><br><br>
+        {% endif %}
+        {% endif %}
 
         {% include 'goods/includes/products.html' %}
 
         {% comment %} <a href="{% url "catalog:index" %}" class="content__bottom-link">Показать еще</a> {% endcomment %}
+        {% if goods %}
         <div class="paginator">
             <div class="items">                
                 <div class="items__item {% if not goods.has_previous %} disable {% endif %}">
@@ -79,6 +86,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         
     </section>
 {% endblock content %}

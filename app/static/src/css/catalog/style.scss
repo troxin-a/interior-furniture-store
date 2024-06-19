@@ -5,7 +5,10 @@
 
 .content {
 
-
+  .text-search {
+    display: block;
+    margin: 10px;
+  }
 
   &__header {
     display: flex;

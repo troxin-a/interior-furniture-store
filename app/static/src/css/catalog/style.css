@@ -3,6 +3,10 @@
   background-image: url(../../img/catalog/bg_top.jpg);
 }
 
+.content .text-search {
+  display: block;
+  margin: 10px;
+}
 .content__header {
   display: flex;
   justify-content: space-between;

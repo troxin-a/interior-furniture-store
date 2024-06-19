@@ -18,6 +18,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400..600&display=swap" rel="stylesheet">
     {% block css %}{% endblock css %}
     <link rel="stylesheet" href="{% static "src/css/style.css" %}">
+
+    <script>
+        function submitForm() {
+            document.getElementById("order_form").submit();
+        }
+
+        {% comment %} document.getElementById('search').onkeydown = function(e){
+            if(e.keyCode == 13){
+                document.getElementById("search").submit();
+            }
+         }; {% endcomment %}
+    </script>
 </head>
 <body>
 
@@ -26,7 +38,10 @@
         <a href="{% url "main:index" %}" class="logo">
             <img src="{% static "src/img/logo.svg" %}" alt="Логотип" class="logo__img">
         </a>
-        <input type="text" class="header__input" placeholder="Поиск">
+        
+        <form action="{% url "catalog:search" %}" method="get" id="search" class="form">
+            <input type="text" class="header__input" placeholder="Поиск" name="q">
+        </form>
         <nav class="menu">
             <a href="{% url "admin:index" %}" class="menu__link">Админка</a>
             <a href="{% url "catalog:index" "all" %}" class="menu__link">Каталог</a>

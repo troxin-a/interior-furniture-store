@@ -22,16 +22,15 @@
                 <a href="{% url "main:index" %}" class="breadcrumbs__link">Главная</a>
                 <a href="{% url "catalog:index" "all" %}" class="breadcrumbs__link">Каталог товаров</a>
             </div>
-            
-            <script>
-                function submitForm() {
-                    document.getElementById("order_form").submit();
-                }
-            </script>            
-            <form action="" method="get" id="order_form" class="form">
+                        
+            <form action="{% if request.GET.q %}{% url "catalog:search" %}{% else %}{% url "catalog:index" slug_url %}{% endif %}" method="get" id="order_form" class="form">
                 <div class="form__checkbox">
                     <input type="checkbox" class="checkbox" name="on_sale" onchange="submitForm()" {% if request.GET.on_sale %}checked{% endif %}>Распродажа</input>
                 </div>
+
+                {% if request.GET.q %}
+                    <input type="hidden" name="q", value="{{ request.GET.q }}"></input>
+                {% endif %}
 
                 <div class="form__order">
                     <select class="select" name='order_by' onchange="submitForm()">

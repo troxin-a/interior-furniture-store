@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "src/css/cart/style.css" %}">
+{% endblock css %}
+
+{% block content %}
+<section class="cart center">
+    <div class="left">
+        <div>
+            <div class="left__header">
+                <p>Товар</p>
+                <p>К-во</p>
+            </div>
+            <div class="cart__content">
+                <div class="item">
+                    <div class="item__info">
+                        <img src="./src/img/cart/prod1.jpg" alt="Стол MENU" class="item__img">
+                        <div>
+                            <h4 class="item__title">Стол MENU</h4>
+                            <p class="item__description">Для того чтобы трапезничать было приятно, необходим правильный
+                                обеденный стол.</p>
+                            <p class="item__price">34 000 руб.</p>
+                            <div class="item__links">
+                                <a class="item__link" href="#">Избранные</a>
+                                <a class="item__link" href="#">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="number" value="1" min="1" class="item__quantity">
+                </div>
+
+                <div class="item">
+                    <div class="item__info">
+                        <img src="./src/img/cart/prod2.jpg" alt="Диван NASTAN" class="item__img">
+                        <div>
+                            <h4 class="item__title">Диван NASTAN</h4>
+                            <p class="item__description">Модель отличается простотой линий и форм, отсутствием броского
+                                декора. </p>
+                            <p class="item__price">80 000 руб.</p>
+                            <div class="item__links">
+                                <a class="item__link" href="#">Избранные</a>
+                                <a class="item__link" href="#">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="number" value="1" min="1" class="item__quantity">
+                </div>
+            </div>
+        </div>
+        <div class="cart__actions">
+            <button class="cart__button">Очистить корзину</button>
+            <button class="cart__button">Продолжить покупки</button>
+        </div>
+    </div>
+
+    <div class="form">
+        <h3 class="form__title">Оформление заказа</h3>
+        <form class="form__box" action="">
+            <input type="text" class="form__input" placeholder="Имя Фамилия">
+            <input type="text" class="form__input" placeholder="+ 7 904 000 80 80">
+            <input type="text" class="form__input" placeholder="Адрес доставки">
+
+            <div>
+                <h3 class="form__total">Итого: <b>128 000 руб.</b></h3>
+                <button class="form__button" type="submit">Оформить заказ</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="content center">
+    <h2 class="content__title">Специальные предложения</h2>
+
+
+    {% include 'goods/includes/products.html' %}
+
+</section>
+
+{% endblock %}

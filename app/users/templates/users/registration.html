@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "src/css/users/style.css" %}">
+{% endblock css %}
+
+{% block top__content %}
+<div class="logincontent">
+    <div class="login">
+        <h1 class="top__text">Регистрация</h1>
+        <form class="form">                
+            <input type="text" class="form__input" id="firstName"
+                placeholder="Введите ваше имя *" required>
+            <input type="text" class="form__input" id="lastName"
+                placeholder="Введите вашу фамилию *" required>
+            <input type="text" class="form__input" id="username"
+                placeholder="Введите ваше имя пользователя *" required>
+            <input type="email" class="form__input" id="email"
+                placeholder="Введите ваш email *" required>
+            <input type="password" class="form__input" id="password1"
+                placeholder="Введите пароль *" required>
+            <input type="password" class="form__input" id="password2"
+                    placeholder="Подтвердите пароль *" required>
+            <button type="submit"
+                class="form__button">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock top__content %}

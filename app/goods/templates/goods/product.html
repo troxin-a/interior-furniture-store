@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 
@@ -20,9 +20,12 @@
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="prod__img">
 
             <div class="right">
+                <p class="prod__id">ID: {{ product.get_id }}</p>
+
                 <p class="prod__description">{{ product.description }}</p>
+
                 <div class="box-price">
-                    <p class="price">{{ product.get_new_price }}</p>
+                    <p class="price">Цена: {{ product.get_new_price }} р.</p>
                 </div>
                 <form action="#" class="form">
                     <button type="submit" class="form__button">Добавить в корзину</button>

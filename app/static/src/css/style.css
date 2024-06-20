@@ -44,7 +44,7 @@ button {
   margin-top: 128px;
   margin-bottom: 16px;
   color: white;
-  max-width: 792px;
+  max-width: 830px;
 }
 
 .header {
@@ -96,6 +96,7 @@ button {
 
 .content {
   margin-top: 32px;
+  margin-bottom: 64px;
 }
 .content__title {
   font-weight: 600;
@@ -189,7 +190,6 @@ button {
 
 .footer {
   background: #f7f6f6;
-  margin-top: 64px;
   padding-top: 32px;
   padding-bottom: 59px;
   display: flex;

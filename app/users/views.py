@@ -1,9 +1,9 @@
 from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from users.forms import UserLoginForm
+from users.forms import UserLoginForm, UserRegistrationForm
 from goods.models import Products
 
 
@@ -16,7 +16,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('main:index'))                
+                return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserLoginForm()
 
@@ -30,8 +30,19 @@ def login(request):
 
 
 def registration(request):
+    if request.method == "POST":
+        form = UserRegistrationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.instance
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('user:profile'))
+    else:
+        form = UserRegistrationForm()
+
     context = {
-        'title': 'Регистрация'
+        'title': 'Регистрация',
+        'form': form,
     }
 
     return render(request, 'users/registration.html', context)
@@ -58,8 +69,5 @@ def cart(request):
 
 
 def logout(request):
-    context = {
-        'logout': 'Выход'
-    }
-
-    return render(request, '', context)
+    auth.logout(request)
+    return redirect(reverse('main:index'))

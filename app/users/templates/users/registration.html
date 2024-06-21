@@ -6,22 +6,84 @@
 {% endblock css %}
 
 {% block top__content %}
+
 <div class="logincontent">
     <div class="login">
         <h1 class="top__text">Регистрация</h1>
-        <form class="form">                
-            <input type="text" class="form__input" id="firstName"
+        <form class="form" action="{% url "user:registration" %}" method="POST">
+            {% csrf_token %}
+            <input type="text" class="form__input" id="firstName" name="first_name"
+                value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
                 placeholder="Введите ваше имя *" required>
-            <input type="text" class="form__input" id="lastName"
+                {% if form.first_name.errors %}
+                <div class="notifications">
+                    {% for item in form.first_name.errors %}
+                    <div class="notifications__item">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                </div>     
+                {% endif %}
+            <input type="text" class="form__input" id="lastName" name="last_name"
+                value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" 
                 placeholder="Введите вашу фамилию *" required>
-            <input type="text" class="form__input" id="username"
+                {% if form.last_name.errors %}
+                <div class="notifications">
+                    {% for item in form.lastName.errors %}
+                    <div class="notifications__item">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                </div>     
+                {% endif %}
+            <input type="text" class="form__input" id="username" name="username"
+                value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
                 placeholder="Введите ваше имя пользователя *" required>
-            <input type="email" class="form__input" id="email"
+                {% if form.username.errors %}
+                <div class="notifications">
+                    {% for item in form.username.errors %}
+                    <div class="notifications__item">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                </div>     
+                {% endif %}
+            <input type="email" class="form__input" id="email" name="email"
+                value="{% if form.email.value %}{{ form.email.value }}{% endif %}" 
                 placeholder="Введите ваш email *" required>
-            <input type="password" class="form__input" id="password1"
+                {% if form.email.errors %}
+                <div class="notifications">
+                    {% for item in form.email.errors %}
+                    <div class="notifications__item">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                </div>     
+                {% endif %}
+            <input type="password" class="form__input" id="password1" name="password1"
+                value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" 
                 placeholder="Введите пароль *" required>
-            <input type="password" class="form__input" id="password2"
-                    placeholder="Подтвердите пароль *" required>
+                {% if form.password1.errors %}
+                <div class="notifications">
+                    {% for item in form.password1.errors %}
+                    <div class="notifications__item">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                </div>     
+                {% endif %}
+            <input type="password" class="form__input" id="password2" name="password2"
+                value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" 
+                placeholder="Подтвердите пароль *" required>
+                {% if form.password2.errors %}
+                <div class="notifications">
+                    {% for item in form.password2.errors %}
+                    <div class="notifications__item">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                </div>     
+                {% endif %}
             <button type="submit"
                 class="form__button">Зарегистрироваться</button>
                 </form>
@@ -29,4 +91,5 @@
         </div>
     </div>
 </div>
+
 {% endblock top__content %}

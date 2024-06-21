@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static "src/css/users/profile.css" %}">    
+    <link rel="stylesheet" href="{% static "src/css/users/profile.css" %}">
+    <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+    
 {% endblock css %}
 
 {% block top__content %}
@@ -17,25 +19,70 @@
     <div class="profile">
         <h1>Обо мне</h1>
         <div class="">            
-            <form class="form">
+            <form class="form" action="{% url "user:profile" %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="avatar">
-                    <img src="{% static "src/img/cart/prod1.jpg" %}"
+                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static "src/img/cart/prod1.jpg" %}{% endif %}"
                         alt="Аватар пользователя" class="avatar__img"
                         style="max-width: 150px;">
                     <label class="input-file">
-                        <input type="file" name="file">		
+                        <input type="file" name="image">		
                         <span>Выберите файл</span>
                     </label>
+                    {% if form.image.errors %}
+                    <div class="notifications">
+                        {% for item in form.image.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
-                <input type="text" class="form__input" id="firstName"
-                    placeholder="Введите ваше имя *" value="" required>
-                <input type="text" class="form__input" id="lastName"
-                    placeholder="Введите вашу фамилию *" value="" required>
-                <input type="text" class="form__input" id="username"
-                    placeholder="Введите ваше имя пользователя *" value="" required>
-                <input type="email" class="form__input" id="email"
-                    placeholder="Введите ваш email *" value=""
-                    required>
+                <input type="text" class="form__input" id="firstName" name="first_name"
+                    placeholder="Введите ваше имя *" value="{{ form.first_name.value }}" required>
+                    {% if form.first_name.errors %}
+                    <div class="notifications">
+                        {% for item in form.first_name.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <input type="text" class="form__input" id="lastName" name="last_name"
+                    placeholder="Введите вашу фамилию *" value="{{ form.last_name.value }}" required>
+                    {% if form.last_name.errors %}
+                    <div class="notifications">
+                        {% for item in form.last_name.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <input type="text" class="form__input" id="username" name="username"
+                    placeholder="Введите ваше имя пользователя *" value="{{ form.username.value }}" required>
+                    {% if form.username.errors %}
+                    <div class="notifications">
+                        {% for item in form.username.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <input type="email" class="form__input" id="email" name="email"
+                    placeholder="Введите ваш email *" value="{{ form.email.value }}" required>
+                    {% if form.email.errors %}
+                    <div class="notifications">
+                        {% for item in form.email.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 <button type="submit" class="form__button">Сохранить</button>
                 <a href="{% url "user:cart" %}">
                     <div class="form__button form__button_div">Корзина</div>
@@ -135,6 +182,7 @@
 </div>
 
 <script>
+    <!-- Аккордеон -->
     class ItcAccordion {
       constructor(target, config) {
         this._el = typeof target === 'string' ? document.querySelector(target) : target;
@@ -160,7 +208,14 @@
         });
       }
     }
-
     new ItcAccordion('#accordion-1');
+    <!-- Конец аккордеона -->
+
+    <!-- Для загрузки картинки -->
+    $('.input-file input[type=file]').on('change', function(){
+        let file = this.files[0];
+        $(this).next().html(file.name);
+    });
+    <!-- Конец загрузки картинки -->
 </script>
 {% endblock %}

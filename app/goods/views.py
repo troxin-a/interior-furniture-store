@@ -1,7 +1,7 @@
-from django.shortcuts import get_list_or_404, render
+from django.shortcuts import render
 from django.core.paginator import Paginator
 
-from goods.utils import q_search
+from goods.utils import get_queryset_or_404, q_search
 from goods.models import Products
 
 
@@ -17,10 +17,10 @@ def catalog(request, category_slug=None):
     elif query:
         goods = q_search(query)
     else:
-        goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
+        goods = get_queryset_or_404(Products.objects.filter(category__slug=category_slug))
 
     if on_sale:
-        goods = goods.filter(discount__gt=0)
+        goods = goods.filter(discount__gt=0)        
     if order_by and order_by != "default":
         goods = goods.order_by(order_by)
 

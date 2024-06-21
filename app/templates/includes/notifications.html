@@ -1,9 +1,26 @@
 {% if form.non_field_errors %}
-<div class="notifications">
-    {% for item in form.non_field_errors %}
-    <div class="notifications__item">
-        {{ item }}
-    </div>
+<div class="notifications-container">    
+    <div class="notifications">
+        {% for item in form.non_field_errors %}
+        <div class="notifications__item item_red">
+            {{ item }}
+        </div>
+        {% endfor %}
+    </div>    
+</div>
+{% endif %}
+
+{% if messages %}
+<div id="notifications" class="notifications-container notifications-container_center">    
+    <div class="notifications">
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="notifications__item item_green">{{ message }}</div>
+        {% endif %}
+        {% if message.tags == 'warning' %}
+        <div class="notifications__item item_yellow">{{ warning }}</div>
+        {% endif %}
     {% endfor %}
+    </div>    
 </div>
 {% endif %}

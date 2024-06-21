@@ -328,20 +328,54 @@ button {
   }
 }
 
+.notifications-container {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;  
+
+  &_center {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+  }
+
+  &_hide {
+    display: none;
+  }  
+}
+
 .notifications {
-  margin-bottom: 16px;
   background:rgba(231, 231, 231, 0.589);
   color: $text_color;
   border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.363);
+  margin-bottom: 16px;
+  
 
   &__item {
     margin: 10px;
     padding: 10px;
     background: rgba(136, 136, 136, 0.712);
     color: $text_color;
-    border-radius: 10px;
+    border-radius: 10px;      
+  }
+
+  .item_red {
+    background: rgba(194, 5, 5, 0.712);
+  }
+
+  .item_green {
+    background: rgba(0, 121, 16, 0.712);
+  }
+
+  .item_yellow {
+    background: rgba(255, 196, 0, 0.712);
   }
 }
+
+
 
 @import "tablet";
 @import "mobile";

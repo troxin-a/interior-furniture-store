@@ -149,6 +149,7 @@
         </nav>
     </header>
 
+    {% include 'includes/notifications.html' %}
     {% block top__content %}{% endblock top__content %}
 </div>
 
@@ -230,6 +231,15 @@
 </footer>
 
 </body>
+<script>
+    setTimeout(hide_notifications, 5000);
+ 
+    function hide_notifications(){
+	    var element = document.getElementById("notifications");
+        element.className += ' notifications-container_hide';
+    }
+</script>
+
 
 
 </html>

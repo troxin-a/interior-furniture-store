@@ -293,11 +293,28 @@ button {
   text-decoration-line: underline;
 }
 
+.notifications-container {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+.notifications-container_center {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.notifications-container_hide {
+  display: none;
+}
+
 .notifications {
-  margin-bottom: 16px;
   background: rgba(231, 231, 231, 0.589);
   color: #FFFFFF;
   border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.363);
+  margin-bottom: 16px;
 }
 .notifications__item {
   margin: 10px;
@@ -305,6 +322,15 @@ button {
   background: rgba(136, 136, 136, 0.712);
   color: #FFFFFF;
   border-radius: 10px;
+}
+.notifications .item_red {
+  background: rgba(194, 5, 5, 0.712);
+}
+.notifications .item_green {
+  background: rgba(0, 121, 16, 0.712);
+}
+.notifications .item_yellow {
+  background: rgba(255, 196, 0, 0.712);
 }
 
 @media (max-width: 1024px) {

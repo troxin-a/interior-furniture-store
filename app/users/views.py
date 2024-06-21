@@ -1,9 +1,10 @@
-from django.contrib import auth
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import auth, messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserEditForm, UserLoginForm, UserRegistrationForm
 from goods.models import Products
 
 
@@ -16,6 +17,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
+                messages.success(request, f"Вы успешно вошли в аккаунт {username}")
                 return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserLoginForm()
@@ -36,7 +38,8 @@ def registration(request):
             form.save()
             user = form.instance
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('user:profile'))
+            messages.success(request, f"Вы успешно зарегистрировались и вошли в аккаунт {user.username}")
+            return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserRegistrationForm()
 
@@ -48,13 +51,26 @@ def registration(request):
     return render(request, 'users/registration.html', context)
 
 
+@login_required
 def profile(request):
+    if request.method == "POST":
+        form = UserEditForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Профиль успешно обновлен")
+            return HttpResponseRedirect(reverse('user:profile'))
+    else:
+        form = UserEditForm(instance=request.user)
+
     context = {
-        'title': 'Профиль'
+        'title': 'Профиль пользователя',
+        'form': form,
     }
 
     return render(request, 'users/profile.html', context)
 
+
+@login_required
 def cart(request):
     goods = Products.objects.order_by("?")
 
@@ -68,6 +84,8 @@ def cart(request):
     return render(request, 'users/cart.html', context)
 
 
+@login_required
 def logout(request):
-    auth.logout(request)
+    messages.success(request, "Выполнен выход из аккаунта")
+    auth.logout(request)    
     return redirect(reverse('main:index'))

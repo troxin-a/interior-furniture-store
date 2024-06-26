@@ -27,9 +27,7 @@
                 <div class="box-price">
                     <p class="price">Цена: {{ product.get_new_price }} р.</p>
                 </div>
-                <form action="#" class="form">
-                    <button type="submit" class="form__button">Добавить в корзину</button>
-                </form>
+                <a href="{% url "cart:cart_add" product.slug %}"><div class="cart__button">Добавить в корзину</div></a>
             </div>
             
         </div>

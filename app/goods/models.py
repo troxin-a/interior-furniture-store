@@ -41,7 +41,12 @@ class Products(models.Model):
         price = f"{self.price:,}".replace(',', ' ')
         return price
 
+    def get_sell_price(self):
+        if self.discount:
+            return round(self.price - (self.price * self.discount / 100))
+        return self.price
+
     def get_new_price(self) -> str:
-        price = round(self.price - (self.price * self.discount / 100))
+        price = self.get_sell_price()
         price = f"{price:,}".replace(',', ' ')
         return price

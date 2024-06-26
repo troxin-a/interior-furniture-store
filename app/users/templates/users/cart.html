@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load carts_tags %}
+
+
 
 {% block css %}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -8,6 +11,7 @@
 
 {% block content %}
 <section class="cart center">
+    {% user_carts request as carts %}
     <div class="left">
         <div>
             <div class="left__header">
@@ -15,44 +19,34 @@
                 <p>К-во</p>
             </div>
             <div class="cart__content">
+                {% if user.is_authenticated %}
+                {% for cart in carts %}
                 <div class="item">
                     <div class="item__info">
-                        <img src="./src/img/cart/prod1.jpg" alt="Стол MENU" class="item__img">
+                        {% if cart.product.image %}
+                            <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}" class="item__img">
+                        {% else %}
+                            <img src="{% static "src/img/catalog/image_not_found.jpg" %}" alt="{{ cart.product.name }}" class="item__img">
+                        {% endif %}
                         <div>
-                            <h4 class="item__title">Стол MENU</h4>
-                            <p class="item__description">Для того чтобы трапезничать было приятно, необходим правильный
-                                обеденный стол.</p>
-                            <p class="item__price">34 000 руб.</p>
+                            <h4 class="item__title">{{ cart.product.name }}</h4>
+                            <p class="item__description">{{ cart.product.description|truncatewords:10 }}</p>
+                            <p class="item__price">{{ cart.product.get_new_price }} руб.</p>
                             <div class="item__links">
                                 <a class="item__link" href="#">Избранные</a>
-                                <a class="item__link" href="#">Удалить</a>
+                                <a class="item__link" href="{% url "carts:cart_remove" 1 %}">Удалить</a>
                             </div>
                         </div>
                     </div>
-                    <input type="number" value="1" min="1" class="item__quantity">
+                    <input type="number" value="{{ cart.quantity }}" min="1" class="item__quantity">
                 </div>
-
-                <div class="item">
-                    <div class="item__info">
-                        <img src="./src/img/cart/prod2.jpg" alt="Диван NASTAN" class="item__img">
-                        <div>
-                            <h4 class="item__title">Диван NASTAN</h4>
-                            <p class="item__description">Модель отличается простотой линий и форм, отсутствием броского
-                                декора. </p>
-                            <p class="item__price">80 000 руб.</p>
-                            <div class="item__links">
-                                <a class="item__link" href="#">Избранные</a>
-                                <a class="item__link" href="#">Удалить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="number" value="1" min="1" class="item__quantity">
-                </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="cart__actions">
-            <button class="cart__button">Очистить корзину</button>
-            <button class="cart__button">Продолжить покупки</button>
+            <a class="cart__button">Очистить корзину</a>
+            <a href="{% url "catalog:index" "all" %}" class="cart__button">Продолжить покупки</a>
         </div>
     </div>
 
@@ -64,7 +58,7 @@
             <input type="text" class="form__input" placeholder="Адрес доставки">
 
             <div>
-                <h3 class="form__total">Итого: <b>128 000 руб.</b></h3>
+                <h3 class="form__total">Итого: <b>{{ carts.total_price }} руб.</b></h3>
                 <button class="form__button" type="submit">Оформить заказ</button>
             </div>
         </form>

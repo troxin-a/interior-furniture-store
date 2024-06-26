@@ -11,7 +11,10 @@
     <div class="login">
         <h1 class="top__text">Авторизация</h1>
         <form class="form" action="{% url "user:login" %}" method="POST">
-            {% csrf_token %}            
+            {% csrf_token %}
+            {% if request.GET.next %}
+                <input type="hidden" name="next", value="{{ request.GET.next }}">
+            {% endif %}
             <input type="text" class="form__input" id="username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" name="username" placeholder="Введите ваше имя пользователя" required>
             <input type="password" class="form__input" id="password" name="password" placeholder="Введите ваш пароль" required>
             <button type="submit" class="form__button">Войти</button>

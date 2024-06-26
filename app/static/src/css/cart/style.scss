@@ -68,7 +68,9 @@
     justify-content: space-between;
 
     &__img {
+      object-fit: cover;
       height: 173px;
+      width: 173px;
     }
 
     &__info {
@@ -210,9 +212,11 @@
   }
 
   &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 200px;
     height: 37px;
-    box-sizing: border-box;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 50px;

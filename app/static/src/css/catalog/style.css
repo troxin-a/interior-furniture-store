@@ -173,4 +173,24 @@
 .prod .form__button:hover {
   background-color: black;
   color: rgb(222, 215, 215);
+}
+
+.cart__button {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 37px;
+  background-color: #fff;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 50px;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: 400;
+  transition: background 0.5s, color 0.5s;
+}
+.cart__button:hover {
+  background-color: black;
+  color: white;
 }/*# sourceMappingURL=style.css.map */

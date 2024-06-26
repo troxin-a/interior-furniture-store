@@ -40,6 +40,10 @@
   padding-top: 64px;
   gap: 32px;
 }
+.cart__empty {
+  grid-column: span 8;
+  font-size: 48px;
+}
 .cart .left {
   grid-column: span 8;
   display: flex;

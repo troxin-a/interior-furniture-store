@@ -12,6 +12,7 @@
 {% block content %}
 <section class="cart center">
     {% user_carts request as carts %}
+    {% if carts %}
     <div class="left">
         <div>
             <div class="left__header">
@@ -34,7 +35,7 @@
                             <p class="item__price">{{ cart.product.get_new_price }} руб.</p>
                             <div class="item__links">
                                 <a class="item__link" href="#">Избранные</a>
-                                <a class="item__link" href="{% url "carts:cart_remove" 1 %}">Удалить</a>
+                                <a class="item__link" href="{% url "carts:cart_remove" cart.id %}">Удалить</a>
                             </div>
                         </div>
                     </div>
@@ -45,12 +46,12 @@
             </div>
         </div>
         <div class="cart__actions">
-            <a class="cart__button">Очистить корзину</a>
+            <a href="{% url "carts:cart_clear" user.id %}" class="cart__button">Очистить корзину</a>
             <a href="{% url "catalog:index" "all" %}" class="cart__button">Продолжить покупки</a>
         </div>
     </div>
 
-    <div class="form">
+    <div class="form">        
         <h3 class="form__title">Оформление заказа</h3>
         <form class="form__box" action="">
             <input type="text" class="form__input" placeholder="Имя Фамилия">
@@ -61,8 +62,14 @@
                 <h3 class="form__total">Итого: <b>{{ carts.total_price }} руб.</b></h3>
                 <button class="form__button" type="submit">Оформить заказ</button>
             </div>
-        </form>
+        </form>        
     </div>
+    {% else %}
+    <div class="cart__empty">
+        <h3>Ваша корзина пуста</h3>
+    </div>
+    
+    {% endif %}
 </section>
 
 <section class="content center">

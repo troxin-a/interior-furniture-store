@@ -8,7 +8,6 @@
             <p>К-во</p>
         </div>
         <div class="cart__content">
-            {% if user.is_authenticated %}
             {% for cart in carts %}
             <div class="item">            
                 <div class="item__info">
@@ -73,15 +72,21 @@
                 </div>
             </div>
             {% endfor %}
-            {% endif %}
         </div>
     </div>
-    <div class="cart__actions">        
+    <div class="cart__actions">
+        {% if user.is_authenticated %}
         <a href="{% url "carts:cart_clear" %}" class="cart__button clear-cart"
         data-user-id="{{ user.id }}">        
             {% csrf_token %}
             Очистить корзину
         </a>
+        {% else %}
+        <a href="{% url "carts:cart_clear" %}" class="cart__button clear-cart">
+            {% csrf_token %}
+            Очистить корзину
+        </a>
+        {% endif %}
         <a href="{% url "catalog:index" "all" %}" class="cart__button">Продолжить покупки</a>
     </div>
 </div>

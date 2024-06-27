@@ -1,4 +1,5 @@
 {% load static %}
+{% load carts_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -148,6 +149,8 @@
             {% endif %} 
         </nav>
     </header>
+
+    {% user_carts request as carts %}
     {% block top__content %}{% endblock top__content %}
 </div>
 

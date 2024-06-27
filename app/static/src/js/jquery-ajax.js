@@ -154,7 +154,7 @@ $(document).ready(function () {
             },
 
             error: function (data) {
-                console.log("Ошибка при добавлении товара в корзину");
+                console.log("Ошибка очистки корзины");
             },
         });
     });

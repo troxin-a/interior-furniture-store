@@ -28,7 +28,13 @@
                 <div class="box-price">
                     <p class="price">Цена: {{ product.get_new_price }} р.</p>
                 </div>
-                <a href="{% url "cart:cart_add" product.slug %}"><div class="cart__button">Добавить в корзину</div></a>
+                <a href="{% url "cart:cart_add" %}" id="cart_add" class="cart__a-mt add-to-cart" data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <div class="cart__button">Добавить в корзину</div>
+                </a>
+                <a href="{% url "user:cart" %}" id="to_cart" class="cart__a-mt cart_hide">
+                    <div class="cart__button">Перейти в корзину</div>
+                </a>
             </div>
             
         </div>

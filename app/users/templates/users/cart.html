@@ -10,66 +10,9 @@
 {% endblock css %}
 
 {% block content %}
-<section class="cart center">
+<section class="cart center" id="cart-items-container">
     {% user_carts request as carts %}
-    {% if carts %}
-    <div class="left">
-        <div>
-            <div class="left__header">
-                <p>Товар</p>
-                <p>К-во</p>
-            </div>
-            <div class="cart__content">
-                {% if user.is_authenticated %}
-                {% for cart in carts %}
-                <div class="item">
-                    <div class="item__info">
-                        {% if cart.product.image %}
-                            <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}" class="item__img">
-                        {% else %}
-                            <img src="{% static "src/img/catalog/image_not_found.jpg" %}" alt="{{ cart.product.name }}" class="item__img">
-                        {% endif %}
-                        <div>
-                            <h4 class="item__title">{{ cart.product.name }}</h4>
-                            <p class="item__description">{{ cart.product.description|truncatewords:10 }}</p>
-                            <p class="item__price">{{ cart.product.get_new_price }} руб.</p>
-                            <div class="item__links">
-                                <a class="item__link" href="#">Избранные</a>
-                                <a class="item__link" href="{% url "carts:cart_remove" cart.id %}">Удалить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="number" value="{{ cart.quantity }}" min="1" class="item__quantity">
-                </div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <div class="cart__actions">
-            <a href="{% url "carts:cart_clear" user.id %}" class="cart__button">Очистить корзину</a>
-            <a href="{% url "catalog:index" "all" %}" class="cart__button">Продолжить покупки</a>
-        </div>
-    </div>
-
-    <div class="form">        
-        <h3 class="form__title">Оформление заказа</h3>
-        <form class="form__box" action="">
-            <input type="text" class="form__input" placeholder="Имя Фамилия">
-            <input type="text" class="form__input" placeholder="+ 7 904 000 80 80">
-            <input type="text" class="form__input" placeholder="Адрес доставки">
-
-            <div>
-                <h3 class="form__total">Итого: <b>{{ carts.total_price }} руб.</b></h3>
-                <button class="form__button" type="submit">Оформить заказ</button>
-            </div>
-        </form>        
-    </div>
-    {% else %}
-    <div class="cart__empty">
-        <h3>Ваша корзина пуста</h3>
-    </div>
-    
-    {% endif %}
+    {% include "carts/includes/included_cart.html" %}    
 </section>
 
 <section class="content center">

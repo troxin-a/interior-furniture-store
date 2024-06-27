@@ -141,7 +141,8 @@ button {
   margin-bottom: 12px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
@@ -323,14 +324,39 @@ button {
   color: #FFFFFF;
   border-radius: 10px;
 }
-.notifications .item_red {
-  background: rgba(194, 5, 5, 0.712);
+
+.notification {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin-top: 32px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(136, 136, 136, 0.712);
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.521);
 }
-.notifications .item_green {
+.notification_green {
   background: rgba(0, 121, 16, 0.712);
 }
-.notifications .item_yellow {
+.notification_red {
+  background: rgba(194, 5, 5, 0.712);
+}
+.notification_yellow {
   background: rgba(255, 196, 0, 0.712);
+}
+.notification_transparent {
+  opacity: 0;
+}
+.notification_hide {
+  display: none;
+}
+.notification_opacity {
+  transition: opacity 0.3s;
 }
 
 @media (max-width: 1024px) {

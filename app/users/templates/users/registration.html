@@ -18,7 +18,7 @@
                 {% if form.first_name.errors %}
                 <div class="notifications">
                     {% for item in form.first_name.errors %}
-                    <div class="notifications__item item_red">
+                    <div class="notifications__item notification_red">
                         {{ item }}
                     </div>
                     {% endfor %}
@@ -30,7 +30,7 @@
                 {% if form.last_name.errors %}
                 <div class="notifications">
                     {% for item in form.lastName.errors %}
-                    <div class="notifications__item item_red">
+                    <div class="notifications__item notification_red">
                         {{ item }}
                     </div>
                     {% endfor %}
@@ -42,7 +42,7 @@
                 {% if form.username.errors %}
                 <div class="notifications">
                     {% for item in form.username.errors %}
-                    <div class="notifications__item item_red">
+                    <div class="notifications__item notification_red">
                         {{ item }}
                     </div>
                     {% endfor %}
@@ -54,7 +54,7 @@
                 {% if form.email.errors %}
                 <div class="notifications">
                     {% for item in form.email.errors %}
-                    <div class="notifications__item item_red">
+                    <div class="notifications__item notification_red">
                         {{ item }}
                     </div>
                     {% endfor %}
@@ -66,7 +66,7 @@
                 {% if form.password1.errors %}
                 <div class="notifications">
                     {% for item in form.password1.errors %}
-                    <div class="notifications__item item_red">
+                    <div class="notifications__item notification_red">
                         {{ item }}
                     </div>
                     {% endfor %}
@@ -78,7 +78,7 @@
                 {% if form.password2.errors %}
                 <div class="notifications">
                     {% for item in form.password2.errors %}
-                    <div class="notifications__item item_red">
+                    <div class="notifications__item notification_red">
                         {{ item }}
                     </div>
                     {% endfor %}

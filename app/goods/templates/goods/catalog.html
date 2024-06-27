@@ -56,7 +56,16 @@
         {% comment %} <a href="{% url "catalog:index" %}" class="content__bottom-link">Показать еще</a> {% endcomment %}
         {% if goods %}
         <div class="paginator">
-            <div class="items">                
+            <div class="items">       
+                <div class="items__item {% if not goods.has_previous %} disable {% endif %}">
+                    <a class="items__link" href="
+                        {% if goods.has_previous %}
+                            ?{% change_params page=1 %}
+                        {% else %}
+                            #
+                        {% endif %}
+                    ">&lt&lt</a>
+                </div>         
                 <div class="items__item {% if not goods.has_previous %} disable {% endif %}">
                     <a class="items__link" href="
                         {% if goods.has_previous %}
@@ -64,7 +73,7 @@
                         {% else %}
                             #
                         {% endif %}
-                    ">&lt&lt</a>
+                    ">&lt</a>
                 </div>
                 
                 {% for page in goods.paginator.page_range %}
@@ -79,6 +88,15 @@
                     <a class="items__link" href="
                         {% if goods.has_next %}
                             ?{% change_params page=goods.next_page_number %}
+                        {% else %}
+                            #
+                        {% endif %}
+                    ">&gt</a>
+                </div>
+                <div class="items__item {% if not goods.has_next %} disable {% endif %}">
+                    <a class="items__link" href="
+                        {% if goods.has_next %}
+                            ?{% change_params page=goods.paginator.num_pages %}
                         {% else %}
                             #
                         {% endif %}

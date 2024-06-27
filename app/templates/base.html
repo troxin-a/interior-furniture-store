@@ -148,12 +148,11 @@
             {% endif %} 
         </nav>
     </header>
-
-    {% include 'includes/notifications.html' %}
     {% block top__content %}{% endblock top__content %}
 </div>
 
 {% block content %}{% endblock content %}
+{% include 'includes/notifications.html' %}
 
 
 <footer class="footer center">
@@ -232,17 +231,8 @@
         </form>
     </div>
 </footer>
-
+<script src="{% static "src/js/jquery/jquery-3.7.1.min.js" %}"></script>
+<script src="{% static "src/js/jquery-ajax.js" %}"></script>
 </body>
-<script>
-    setTimeout(hide_notifications, 5000);
- 
-    function hide_notifications(){
-	    var element = document.getElementById("notifications");
-        element.className += ' notifications-container_hide';
-    }
-</script>
-
-
 
 </html>

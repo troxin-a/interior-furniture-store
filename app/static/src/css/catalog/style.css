@@ -175,8 +175,13 @@
   color: rgb(222, 215, 215);
 }
 
-.cart__button {
+.cart_hide {
+  display: none;
+}
+.cart__a-mt {
   margin-top: 16px;
+}
+.cart__button {
   display: flex;
   justify-content: center;
   align-items: center;

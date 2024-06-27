@@ -1,0 +1,19 @@
+{% if form.non_field_errors %}
+    {% for item in form.non_field_errors %}
+    <div id="notification" class="notification notification_red notification_opacity">{{ item }}</div>
+    {% endfor %}
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div id="notification" class="notification notification_green notification_opacity">{{ message }}</div>
+        {% endif %}
+        {% if message.tags == 'warning' %}
+        <div id="notification" class="notification notification_yellow notification_opacity">{{ warning }}</div>
+        {% endif %}
+    {% endfor %}     
+{% else %}
+    <div id="jq-notification" class="notification" style="display: none;" role="alert">
+    </div>
+{% endif %}

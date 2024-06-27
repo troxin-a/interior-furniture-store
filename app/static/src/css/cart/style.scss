@@ -42,6 +42,11 @@
   padding-top: 64px;
   gap: 32px;
 
+  &__empty {
+    grid-column: span 8;
+    font-size: 48px;
+  }
+
   .left {
     grid-column: span 8;
     display: flex;
@@ -68,7 +73,9 @@
     justify-content: space-between;
 
     &__img {
+      object-fit: cover;
       height: 173px;
+      width: 173px;
     }
 
     &__info {
@@ -117,18 +124,41 @@
     }
 
     &__quantity {
-      width: 71px;
       height: 51px;
+      display: flex;
       border-radius: 6px;
       border-style: none;
-      background: rgb(247, 246, 246);
+      background: rgb(247, 246, 246);      
+      align-items: center;
+    }
+    .digit {
+      width: 41px;
       font-family: "Poppins";
       font-size: 14px;
       font-weight: 600;
       line-height: 210%;
       text-align: center;
-      padding-left: 16px;
-      padding-right: 16px;
+      background: transparent;
+      border: none;
+      outline:none;
+      cursor: auto;
+    }
+    .buttons {
+      height: 100%;
+      width: 30px;      
+
+      .button {
+        height: 50%;
+        display: flex;
+        align-items: center;
+        border-radius: 6px;
+        transition: background 0.2s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #888888;
+        }
+      }      
     }
   }
 
@@ -210,9 +240,11 @@
   }
 
   &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 200px;
     height: 37px;
-    box-sizing: border-box;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 50px;

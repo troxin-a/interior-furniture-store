@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% load carts_tags %}
+
+
+
+{% block css %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "src/css/cart/style.css" %}">
+{% endblock css %}
+
+{% block content %}
+<section class="cart center" id="cart-items-container">
+    {% user_carts request as carts %}
+    {% include "carts/includes/included_cart.html" %}    
+</section>
+
+<section class="content center">
+    <h2 class="content__title">Специальные предложения</h2>
+
+
+    {% include 'includes/products.html' %}
+
+</section>
+
+{% endblock %}

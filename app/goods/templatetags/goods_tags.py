@@ -1,12 +1,14 @@
+from django.utils.http import urlencode
 from django import template
-
-from goods.models import Products
 
 
 register = template.Library()
 
 
-@register.simple_tag()
-def tag_goods():
-    return Products.objects.order_by("?")
+@register.simple_tag(takes_context=True)
+def change_params(context, **kwargs):
+    query = context['request'].GET.dict()
+    query.update(kwargs)
+    # query = {k:v for k, v in query.items() if v}
+    return urlencode(query)
     

@@ -5,7 +5,10 @@
 
 .content {
 
-
+  .text-search {
+    display: block;
+    margin: 10px;
+  }
 
   &__header {
     display: flex;
@@ -37,47 +40,61 @@
     }
   }
 
-  &__sort {
-    display: grid;
-    grid-template-areas: "select";
+  .form {
+    display: flex;
     align-items: center;
-    width: 288px;
-    height: 41px;
-    box-sizing: border-box;
-    border: 1px solid rgb(196, 196, 196);
-    border-radius: 20px;
-    padding-left: 14px;
-    padding-right: 14px;
 
-    &::after {
-      justify-self: end;
-      content: "";
-      width: 17px;
-      height: 8px;
-      background-color: #000000;
-      clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-      grid-area: select;
+    &__checkbox {
+      margin-right: 50px;
+
+      .checkbox {
+        margin-right: 10px;
+      }
     }
 
-    .select {
-      border: none;
-      outline: none;
-      appearance: none;
-      background-color: transparent;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      color: rgb(0, 0, 0);
-      font-size: 16px;
-      font-weight: 400;
-      cursor: pointer;
-      grid-area: select;
-
-      &::-ms-expand {
-        display: none;
+    &__order {
+      display: grid;
+      grid-template-areas: "select";
+      align-items: center;
+      width: 288px;
+      height: 41px;
+      box-sizing: border-box;
+      border: 1px solid rgb(196, 196, 196);
+      border-radius: 20px;
+      padding-left: 14px;
+      padding-right: 14px;
+  
+      &::after {
+        justify-self: end;
+        content: "";
+        width: 17px;
+        height: 8px;
+        background-color: #000000;
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        grid-area: select;
+      }
+  
+      .select {
+        border: none;
+        outline: none;
+        appearance: none;
+        background-color: transparent;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        font-weight: 400;
+        cursor: pointer;
+        grid-area: select;
+  
+        &::-ms-expand {
+          display: none;
+        }
       }
     }
   }
+
 
   .paginator {
     display: flex;    
@@ -184,6 +201,38 @@
         background-color: black;
         color: rgb(222, 215, 215);
       }
+    }
+  }
+}
+
+.cart {
+
+  &_hide {
+    display: none;
+  }
+
+  &__a-mt {
+    margin-top: 16px;
+  }
+
+  &__button {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 37px;
+    background-color: #fff;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-weight: 400;
+    transition: background 0.5s, color 0.5s;
+
+    &:hover {
+      background-color: black;
+      color: white;
     }
   }
 }

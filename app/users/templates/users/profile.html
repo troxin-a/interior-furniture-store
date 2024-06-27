@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "src/css/users/profile.css" %}">
+    <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+    
+{% endblock css %}
+
+{% block top__content %}
+    <section class="top__content">
+        <h1 class="top__title">Профиль пользователя</h1>
+    </section>
+{% endblock top__content %}
+
+{% block content %}
+<div class="content center">
+    <!-- Профиль с данными пользователя -->
+    <div class="profile">
+        <h1>Обо мне</h1>
+        <div class="">            
+            <form class="form" action="{% url "user:profile" %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="avatar">
+                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static "src/img/cart/prod1.jpg" %}{% endif %}"
+                        alt="Аватар пользователя" class="avatar__img"
+                        style="max-width: 150px;">
+                    <label class="input-file">
+                        <input type="file" name="image">		
+                        <span>Выберите файл</span>
+                    </label>
+                    {% if form.image.errors %}
+                    <div class="notifications">
+                        {% for item in form.image.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <input type="text" class="form__input" id="firstName" name="first_name"
+                    placeholder="Введите ваше имя *" value="{{ form.first_name.value }}" required>
+                    {% if form.first_name.errors %}
+                    <div class="notifications">
+                        {% for item in form.first_name.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <input type="text" class="form__input" id="lastName" name="last_name"
+                    placeholder="Введите вашу фамилию *" value="{{ form.last_name.value }}" required>
+                    {% if form.last_name.errors %}
+                    <div class="notifications">
+                        {% for item in form.last_name.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <input type="text" class="form__input" id="username" name="username"
+                    placeholder="Введите ваше имя пользователя *" value="{{ form.username.value }}" required>
+                    {% if form.username.errors %}
+                    <div class="notifications">
+                        {% for item in form.username.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <input type="email" class="form__input" id="email" name="email"
+                    placeholder="Введите ваш email *" value="{{ form.email.value }}" required>
+                    {% if form.email.errors %}
+                    <div class="notifications">
+                        {% for item in form.email.errors %}
+                        <div class="notifications__item item_red">
+                            {{ item }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <button type="submit" class="form__button">Сохранить</button>
+                <a href="{% url "user:cart" %}">
+                    <div class="form__button form__button_div">Корзина</div>
+                </a>                
+            </form>
+        </div>
+    </div>
+    <!-- Оформленные заказы -->
+    <div class="profile">
+        <h1>Мои заказы</h1>
+        <div class="accordion" id="accordion-1">
+            <div class="accordion__item accordion__item_show">
+                <div class="accordion__header">
+                    Заказ № 256 - 09 сентября 2023 9:04 | Статус:&nbsp<strong>В обработке</strong>
+                </div>
+                <div class="accordion__body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                                <th>Общая стоимость</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
+                                <td>1</td>
+                                <td>1 500 000 р</td>
+                                <td>280 000 р</td>                                
+                            </tr>
+                            <tr>
+                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
+                                <td>1</td>
+                                <td>150 000 р</td>
+                                <td>280 000 р</td>                                
+                            </tr>
+                            <tr>
+                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
+                                <td>1</td>
+                                <td>150 000 р</td>
+                                <td>280 000 р</td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table__total">
+                        <p><strong>Итого:</strong></p>
+                        <p><strong>150 000 р</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion__item">
+                <div class="accordion__header">
+                    Заказ № 34 - 01 октября 2021 10:01 | Статус:&nbsp<strong>Доставлен</strong>
+                </div>
+                <div class="accordion__body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                                <th>Общая стоимость</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
+                                <td>1</td>
+                                <td>1 500 000 р</td>
+                                <td>280 000 р</td>                                
+                            </tr>
+                            <tr>
+                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
+                                <td>1</td>
+                                <td>150 000 р</td>
+                                <td>280 000 р</td>                                
+                            </tr>
+                            <tr>
+                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
+                                <td>1</td>
+                                <td>150 000 р</td>
+                                <td>280 000 р</td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table__total">
+                        <p><strong>Итого:</strong></p>
+                        <p><strong>150 000 р</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Закончилась разметка заказов -->
+    </div>
+</div>
+
+<script>
+    <!-- Аккордеон -->
+    class ItcAccordion {
+      constructor(target, config) {
+        this._el = typeof target === 'string' ? document.querySelector(target) : target;
+        const defaultConfig = {
+          alwaysOpen: true
+        };
+        this._config = Object.assign(defaultConfig, config);
+        this.addEventListener();
+      }
+      addEventListener() {
+        this._el.addEventListener('click', (e) => {
+          const elHeader = e.target.closest('.accordion__header');
+          if (!elHeader) {
+            return;
+          }
+          if (!this._config.alwaysOpen) {
+            const elOpenItem = this._el.querySelector('.accordion__item_show');
+            if (elOpenItem) {
+              elOpenItem !== elHeader.parentElement ? elOpenItem.classList.toggle('accordion__item_show') : null;
+            }
+          }
+          elHeader.parentElement.classList.toggle('accordion__item_show');
+        });
+      }
+    }
+    new ItcAccordion('#accordion-1');
+    <!-- Конец аккордеона -->
+
+    <!-- Для загрузки картинки -->
+    $('.input-file input[type=file]').on('change', function(){
+        let file = this.files[0];
+        $(this).next().html(file.name);
+    });
+    <!-- Конец загрузки картинки -->
+</script>
+{% endblock %}

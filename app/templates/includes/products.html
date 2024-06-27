@@ -1,9 +1,7 @@
 {% load static %}
-{% comment %} {% load goods_tags %} {% endcomment %}
 
 
 <div class="products">
-    {% comment %} {% tag_goods as goods %} {% endcomment %}    
     {% for product in goods %}
         <a href="{% url "catalog:product" product.slug %}">
             <div class="product">
@@ -17,8 +15,24 @@
                         <span class = "text">Скидка: {{ product.discount }} %</span>
                     </div>
                 {% endif %}
-                <h3 class="product__title">{{ product.name }}</h3>
-                <p class="product__description">{{ product.description }}</p>
+                <h3 class="product__title">
+                    {% autoescape off %}
+                        {% if product.headline %}
+                            {{ product.headline }}
+                        {% else %}
+                            {{ product.name }}
+                        {% endif %}
+                    {% endautoescape %}
+                </h3>
+                <p class="product__description">
+                    {% autoescape off %}
+                        {% if product.bodyline %}
+                            {{ product.bodyline }}
+                        {% else %}
+                            {{ product.description }}
+                        {% endif %}
+                    {% endautoescape %}
+                </p>
                 <div class="box-price">
                     <p class="price">{{ product.get_new_price }} руб.</p>
                     {% if product.discount > 0 %}

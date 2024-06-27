@@ -9,7 +9,7 @@
             "image": "goods_images/prod4.jpg",
             "price": 120000,
             "discount": 0,
-            "quantity": null,
+            "quantity": 4,
             "category": 4
         }
     },

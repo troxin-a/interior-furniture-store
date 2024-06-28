@@ -1,7 +1,7 @@
 // Когда html документ готов (прорисован)
 $(document).ready(function () {
     // берем в переменную элемент разметки с id jq-notification для оповещений от ajax
-    var successMessage = $("#jq-notification");    
+    var successMessage = $("#jq-notification");
 
     // Ловим собыитие клика по кнопке добавить в корзину
     $(document).on("click", ".add-to-cart", function (e) {
@@ -56,7 +56,7 @@ $(document).ready(function () {
         });
 
 
-        
+
     });
 
 

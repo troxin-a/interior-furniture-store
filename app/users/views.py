@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
+from django.db.models import Count, Max, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from carts.models import Cart
 from users.forms import UserEditForm, UserLoginForm, UserRegistrationForm
-from goods.models import Products
 
 
 def login(request):
@@ -18,13 +18,24 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
 
             session_key = request.session.session_key
-            
+
             if user:
                 auth.login(request, user)
                 messages.success(request, f"Вы успешно вошли в аккаунт {username}")
 
                 if session_key:
                     Cart.objects.filter(session_key=session_key).update(user=user)
+
+                    # Объединение одинаковых товаров в одну корзину
+                    user_carts = Cart.objects.filter(user=user)
+                    repeat_products = user_carts.values('product_id').annotate(cnt=Count('id')).filter(cnt__gt=1)
+                    for product in repeat_products:        
+                        prod = user_carts.filter(product_id=product['product_id'])
+                        id = prod.values('product_id').annotate(id=Max('id'))[0]['id']
+                        summ = prod.values('product_id').annotate(summ=Sum('quantity'))[0]['summ']
+
+                        user_carts.filter(id=id).update(quantity=summ)
+                        user_carts.exclude(id=id).filter(product_id=product['product_id']).delete()
 
                 redirect_page = request.POST.get('next', None)
                 if redirect_page and redirect_page != reverse('user:logout'):
@@ -89,13 +100,8 @@ def profile(request):
 
 
 def cart(request):
-    goods = Products.objects.order_by("?")
-
-    goods = goods.filter(discount__gt=0)[:3]
-
     context = {
         'title': 'Корзина',
-        'goods': goods,
     }
 
     return render(request, 'users/cart.html', context)

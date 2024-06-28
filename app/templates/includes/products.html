@@ -1,7 +1,9 @@
 {% load static %}
-
-
-<div class="products">
+{% load goods_tags %}
+<div class="products">    
+    {% if filter %}
+    {% list_products filter=filter as goods %}
+    {% endif %}
     {% for product in goods %}
         <a href="{% url "catalog:product" product.slug %}">
             <div class="product">

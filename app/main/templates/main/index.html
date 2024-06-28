@@ -1,25 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block css %}
     <link rel="stylesheet" href="{% static "src/css/index/style.css" %}">
 {% endblock css %}
 
-
 {% block top__content %}
     <section class="top__content">
-        <h1 class="top__title">{{ top_content }}</h1>
+        <h1 class="top__title">Всё, чего заслуживает ваш дом</h1>
         <p class="top__text">Наша мебель — ваше отражение</p>
         <a href="{% url "catalog:index" "all" %}" class="top__link">Перейти в каталог</a>
     </section>
 {% endblock top__content %}
 
-
 {% block content %}
     <section class="content center">
         <h2 class="content__title">Мебель для ...</h2>
-
         <div class="for">
             <a href="{% url "catalog:index" "otdyh" %}" class="for__item for__item_1 for__item_big">ОТДЫХА</a>
             <a href="{% url "catalog:index" "rabota" %}" class="for__item for__item_2 for__item_big">РАБОТЫ</a>
@@ -31,43 +27,12 @@
 
     <section class="content center">
         <h2 class="content__title">Специальные предложения</h2>
-
-
-        <div class="products">
-            {% for product in goods_for_sale %}
-                <a href="{% url "catalog:product" product.slug %}">
-                    <div class="product">
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product__img">
-                        {% else %}
-                            <img src="{% static "src/img/catalog/image_not_found.jpg" %}" alt="{{ product.name }}" class="product__img">
-                        {% endif %}
-                        {% if product.discount > 0 %}
-                            <div class="product__sale">
-                                <span class = "text">Скидка: {{ product.discount }} %</span>
-                            </div>
-                        {% endif %}
-                        <h3 class="product__title">{{ product.name }}</h3>
-                        <p class="product__description">{{ product.description }}</p>
-                        <div class="box-price">
-                            <p class="price">{{ product.get_new_price }} руб.</p>
-                            {% if product.discount > 0 %}
-                                <p class="price price_crossed">{{ product.get_old_price }} руб.</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-
+        {% include 'includes/products.html' with filter="spec_offers" %}
     </section>
-
 
     <section class="content center">
         <h2 class="content__title">Каталог товаров</h2>
-
-        {% include 'includes/products.html' %}
-
+        {% include 'includes/products.html' with filter="little" %}
         <a href="{% url "catalog:index" "all" %}" class="content__bottom-link">Перейти в каталог</a>
     </section>
 {% endblock content %}

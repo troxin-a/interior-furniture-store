@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from orders.admin import OrderTabAdmin
 from carts.admin import CartTabAdmin
 from users.models import User
 
@@ -16,4 +17,4 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ["username", "first_name", "last_name", "email"]
 
     # Отображение корзины в карточке пользователя
-    inlines = [CartTabAdmin]
+    inlines = [CartTabAdmin, OrderTabAdmin]

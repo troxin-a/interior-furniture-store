@@ -42,12 +42,14 @@ class UserEditForm(UserChangeForm):
             "image",
             "first_name",
             "last_name",
-            "username",
+            "phone_number",
+            "delivery_address",
             "email",
         )
 
         image = forms.ImageField(required=False)
         first_name = forms.CharField()
         last_name = forms.CharField()
-        username = forms.CharField()
+        phone_number = forms.CharField()
+        delivery_address = forms.CharField()
         email = forms.CharField()

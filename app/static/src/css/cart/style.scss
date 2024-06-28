@@ -167,7 +167,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 556px;
+    // height: 556px;
     border-radius: 20px;
     background: rgb(247, 246, 246);
     padding-top: 42px;
@@ -216,6 +216,7 @@
     &__button {
       width: 290px;
       height: 41px;
+      margin-bottom: 50px;
       box-sizing: border-box;
       border: 1px solid rgb(4, 4, 4);
       border-radius: 20px;

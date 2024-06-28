@@ -1,4 +1,5 @@
 {% load static %}
+{% load carts_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +25,7 @@
             document.getElementById("order_form").submit();
         }
     </script>
+    <script src="{% static "src/js/jquery/jquery-3.7.1.min.js" %}"></script>
 </head>
 <body>
 
@@ -148,6 +150,8 @@
             {% endif %} 
         </nav>
     </header>
+
+    {% user_carts request as carts %}
     {% block top__content %}{% endblock top__content %}
 </div>
 
@@ -231,7 +235,7 @@
         </form>
     </div>
 </footer>
-<script src="{% static "src/js/jquery/jquery-3.7.1.min.js" %}"></script>
+
 <script src="{% static "src/js/jquery-ajax.js" %}"></script>
 </body>
 

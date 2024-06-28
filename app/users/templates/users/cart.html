@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load carts_tags %}
-
-
 
 {% block css %}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -10,17 +7,14 @@
 {% endblock css %}
 
 {% block content %}
-<section class="cart center" id="cart-items-container">
-    {% user_carts request as carts %}
+<section class="cart center" id="cart-items-container">    
     {% include "carts/includes/included_cart.html" %}    
 </section>
 
 <section class="content center">
     <h2 class="content__title">Специальные предложения</h2>
-
-
-    {% include 'includes/products.html' %}
-
+    {% include 'includes/products.html' with filter="spec_offers" %}
 </section>
 
+<script src="{% static "src/js/phone_number.js" %}"></script>
 {% endblock %}

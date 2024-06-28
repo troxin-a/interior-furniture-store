@@ -27,8 +27,13 @@ urlpatterns = [
     path("catalog/", include("goods.urls", namespace="catalog")),
     path("user/", include("users.urls", namespace="user")),
     path("cart/", include("carts.urls", namespace="cart")),
+    path("orders/", include("orders.urls", namespace="orders")),
+
+    # path(адрес приложения / подключаемый файл / Пространство имен для разграничения)
 ]
 
 if settings.DEBUG:
+    # Приложение для отладки
     urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
+    # Соответствие между URL и путями к файлам, указанных в settings
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

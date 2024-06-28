@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 
 from carts.utils import get_user_carts
@@ -22,6 +21,17 @@ def cart_add(request):
                 cart.save()
         else:
             Cart.objects.create(user=request.user, product=product, quantity=1)
+
+    else:
+        carts = Cart.objects.filter(session_key=request.session.session_key, product=product)
+
+        if carts.exists():
+            cart = carts.first()
+            if cart:
+                cart.quantity += 1
+                cart.save()
+        else:
+            Cart.objects.create(session_key=request.session.session_key, product=product, quantity=1)
 
 
     user_cart = get_user_carts(request)
@@ -82,9 +92,11 @@ def cart_remove(request):
 
 
 def cart_clear(request):
-    user_id = request.POST.get("user_id")
-
-    cart = Cart.objects.filter(user=user_id)
+    if request.user.is_authenticated:
+        user_id = request.POST.get("user_id")
+        cart = Cart.objects.filter(user=user_id)
+    else:
+        cart = Cart.objects.filter(session_key=request.session.session_key)
     cart.delete()
 
     user_cart = get_user_carts(request)

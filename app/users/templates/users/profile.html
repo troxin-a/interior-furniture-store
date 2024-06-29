@@ -22,7 +22,7 @@
             <form class="form" action="{% url "user:profile" %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="avatar">
-                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static "src/img/cart/prod1.jpg" %}{% endif %}"
+                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static "src/img/users/noavatar.png" %}{% endif %}"
                         alt="Аватар пользователя" class="avatar__img"
                         style="max-width: 150px;">
                     <label class="input-file">
@@ -97,13 +97,14 @@
     </div>
     <!-- Оформленные заказы -->
     <div class="profile">
-        <h1>Мои заказы</h1>
+        <h1>Мои заказы</h1>        
         <div class="accordion" id="accordion-1">
-            <div class="accordion__item accordion__item_show">
+            {% for order in orders %}            
+            <div class="accordion__item {% if order == orders.0 %}accordion__item_show{% endif %}">
                 <div class="accordion__header">
-                    Заказ № 256 - 09 сентября 2023 9:04 | Статус:&nbsp<strong>В обработке</strong>
+                    Заказ № {{ order.id }} - {{ order.created_timestamp }} | Статус:&nbsp<strong>{{ order.status }}</strong>
                 </div>
-                <div class="accordion__body">
+                <div class="accordion__body">                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -113,74 +114,20 @@
                                 <th>Общая стоимость</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody>                            
+                            {% for item in order.orderitem_set.all %}
                             <tr>
-                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
-                                <td>1</td>
-                                <td>1 500 000 р</td>
-                                <td>280 000 р</td>                                
+                                <td class="col-name"><a class="table__link" href="{% url "catalog:product" item.product.slug %}">{{ item.product }}</a></td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.price }} р</td>
+                                <td>{{ item.products_price}} р</td>                                
                             </tr>
-                            <tr>
-                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
-                                <td>1</td>
-                                <td>150 000 р</td>
-                                <td>280 000 р</td>                                
-                            </tr>
-                            <tr>
-                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
-                                <td>1</td>
-                                <td>150 000 р</td>
-                                <td>280 000 р</td>                                
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
-                    <div class="table__total">
-                        <p><strong>Итого:</strong></p>
-                        <p><strong>150 000 р</strong></p>
-                    </div>
                 </div>
             </div>
-            <div class="accordion__item">
-                <div class="accordion__header">
-                    Заказ № 34 - 01 октября 2021 10:01 | Статус:&nbsp<strong>Доставлен</strong>
-                </div>
-                <div class="accordion__body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Товар</th>
-                                <th>Количество</th>
-                                <th>Цена</th>
-                                <th>Общая стоимость</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
-                                <td>1</td>
-                                <td>1 500 000 р</td>
-                                <td>280 000 р</td>                                
-                            </tr>
-                            <tr>
-                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
-                                <td>1</td>
-                                <td>150 000 р</td>
-                                <td>280 000 р</td>                                
-                            </tr>
-                            <tr>
-                                <td class="col-name"><a class="table__link" href="#">Комплект стол и три стула</a></td>
-                                <td>1</td>
-                                <td>150 000 р</td>
-                                <td>280 000 р</td>                                
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table__total">
-                        <p><strong>Итого:</strong></p>
-                        <p><strong>150 000 р</strong></p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     <!-- Закончилась разметка заказов -->
     </div>

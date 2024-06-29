@@ -28,6 +28,7 @@
     <section class="content center">
         <h2 class="content__title">Специальные предложения</h2>
         {% include 'includes/products.html' with filter="spec_offers" %}
+        <a href="{% url "catalog:index" "all" %}?on_sale=on" class="content__bottom-link">Подробнее</a>
     </section>
 
     <section class="content center">

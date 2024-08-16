@@ -10,7 +10,7 @@
 
 {% block top__content %}
     <section class="top__content">
-        <h1 class="top__title">{{ product.name }}</h1>
+        <h1 class="top__title">{{ object.name }}</h1>
     </section>
 {% endblock top__content %}
 
@@ -18,17 +18,17 @@
 {% block content %}    
     <section class="content center">
         <div class="prod">            
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="prod__img">
+            <img src="{{ object.image.url }}" alt="{{ object.name }}" class="prod__img">
 
             <div class="right">
-                <p class="prod__id">ID: {{ product.get_id }}</p>
+                <p class="prod__id">ID: {{ object.get_id }}</p>
 
-                <p class="prod__description">{{ product.description }}</p>
+                <p class="prod__description">{{ object.description }}</p>
 
                 <div class="box-price">
-                    <p class="price">Цена: {{ product.get_new_price }} р.</p>
+                    <p class="price">Цена: {{ object.get_new_price }} р.</p>
                 </div>
-                <a href="{% url "cart:cart_add" %}" id="cart_add" class="cart__a-mt add-to-cart" data-product-id="{{ product.id }}">
+                <a href="{% url "cart:cart_add" %}" id="cart_add" class="cart__a-mt add-to-cart" data-product-id="{{ object.id }}">
                     {% csrf_token %}
                     <div class="cart__button">Добавить в корзину</div>
                 </a>

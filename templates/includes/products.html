@@ -2,9 +2,9 @@
 {% load goods_tags %}
 <div class="products">    
     {% if filter %}
-    {% list_products filter=filter as goods %}
+    {% list_products filter=filter as page_obj %}
     {% endif %}
-    {% for product in goods %}
+    {% for product in page_obj %}
         <a href="{% url "catalog:product" product.slug %}">
             <div class="product">
                 {% if product.image %}

@@ -1,46 +1,47 @@
-from django.shortcuts import render
-from django.core.paginator import Paginator
+from django.db.models.base import Model as Model
+from django.views.generic import DetailView, ListView
 
 from goods.utils import get_queryset_or_404, q_search
 from goods.models import Products
 
 
-def catalog(request, category_slug=None, onsale=None):
+class ProductsListView(ListView):
+    model = Products
+    template_name = "goods/catalog.html"
+    paginate_by = 6
+    category_slug = None
 
-    page_number = request.GET.get("page", 1)
-    order_by = request.GET.get("order_by", None)
-    on_sale = request.GET.get("on_sale", onsale)
-    query = request.GET.get("q", None)
+    def get(self, request, category_slug=None):
+        self.category_slug = category_slug
+        self.queryset = Products.objects.all()
 
-    if category_slug == "all":
-        goods = Products.objects.all()
-    elif query:
-        goods = q_search(query)
-    else:
-        goods = get_queryset_or_404(Products.objects.filter(category__slug=category_slug))
+        order_by = request.GET.get("order_by")
+        on_sale = request.GET.get("on_sale")
+        query = request.GET.get("q")
 
-    if on_sale:
-        goods = goods.filter(discount__gt=0)
-    if order_by and order_by != "default":
-        goods = goods.order_by(order_by)
+        if category_slug == "all":
+            self.queryset = self.queryset
+        elif query:
+            self.queryset = q_search(query)
+        else:
+            self.queryset = get_queryset_or_404(
+                Products.objects.filter(category__slug=category_slug)
+            )
 
-    paginator = Paginator(goods, 6)
-    current_page = paginator.page(page_number)
+        if on_sale:
+            self.queryset = self.queryset.filter(discount__gt=0)
+        if order_by and order_by != "default":
+            self.queryset = self.queryset.order_by(order_by)
+        return super().get(request)
 
-    context = {
-        "title": "Каталог",
-        "goods": current_page,
-        "slug_url": category_slug,
-    }
-    return render(request, "goods/catalog.html", context=context)
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data["title"] = "Каталог"
+        context_data["slug_url"] = self.category_slug
+        return context_data
 
 
-def product(request, product_slug):
-
-    prod = Products.objects.get(slug=product_slug)
-
-    context = {
-        "title": prod.name,
-        "product": prod,
-    }
-    return render(request, "goods/product.html", context=context)
+class ProductsDetailView(DetailView):
+    model = Products
+    template_name = "goods/product.html"
+    slug_url_kwarg = "product_slug"

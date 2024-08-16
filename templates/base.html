@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>{% if object %}{{object}}{% else %}{{ title }}{% endif %}</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
         <svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22>
             <rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a7a272%22></rect>
@@ -40,7 +40,7 @@
         </form>
         <nav class="menu">            
             <a href="{% url "catalog:index" "all" %}" class="menu__link">Каталог</a>
-            <a href="{% url "user:cart" %}" class="menu__link">Корзина</a>
+            <a href="{% url "orders:create_order" %}" class="menu__link">Корзина</a>
             {% if not user.is_authenticated %}
             <a href="{% url "user:login" %}" class="menu__link">Войти</a>
             {% else %}
